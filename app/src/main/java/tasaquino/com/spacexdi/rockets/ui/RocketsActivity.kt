@@ -3,6 +3,7 @@ package tasaquino.com.spacexdi
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import tasaquino.com.spacexdi.networking.NetworkingFactory
 import tasaquino.com.spacexdi.rockets.Rockets
 import tasaquino.com.spacexdi.rockets.infrastructure.RocketsInfrastructure
 import tasaquino.com.spacexdi.rockets.presenter.RocketsPresenter
@@ -23,7 +24,7 @@ class RocketsActivity : AppCompatActivity(), Rockets.View {
     }
 
     private fun bindViewAndLoad() {
-        presenter = RocketsPresenter(source = RocketsInfrastructure())
+        presenter = RocketsPresenter(source = RocketsInfrastructure(NetworkingFactory.api))
         presenter.bind(this)
         presenter.loadRockets()
     }
