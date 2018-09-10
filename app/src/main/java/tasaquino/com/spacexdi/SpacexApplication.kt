@@ -17,7 +17,7 @@ class SpacexApplication : Application(), HasActivityInjector {
         super.onCreate()
 
         DaggerAppComponent
-                .builder().build()
+                .create()
                 .inject(this)
     }
 
