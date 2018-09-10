@@ -3,6 +3,7 @@ package tasaquino.com.spacexdi
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import dagger.android.AndroidInjection
 import tasaquino.com.spacexdi.rockets.Rockets
 import tasaquino.com.spacexdi.rockets.infrastructure.RocketsInfrastructure
 import tasaquino.com.spacexdi.rockets.presenter.RocketsPresenter
@@ -10,9 +11,6 @@ import tasaquino.com.spacexdi.rockets.presenter.model.RocketViewModel
 import javax.inject.Inject
 
 class RocketsActivity : AppCompatActivity(), Rockets.View {
-    override fun showRockets(rockets: List<RocketViewModel>) {
-        Log.d("Rockets", "Awsome rockets: $rockets")
-    }
 
     @Inject
     lateinit var presenter: Rockets.Presenter
@@ -25,11 +23,13 @@ class RocketsActivity : AppCompatActivity(), Rockets.View {
     }
 
     private fun bindViewAndLoad() {
-        val subComponent = (application as SpacexApplication).appComponent.screenSubComponent()
-        subComponent.inject(this)
-
+        AndroidInjection.inject(this)
         presenter.bind(this)
         presenter.loadRockets()
+    }
+
+    override fun showRockets(rockets: List<RocketViewModel>) {
+        Log.d("Rockets", "Awsome rockets: $rockets")
     }
 
     override fun showLoading() {

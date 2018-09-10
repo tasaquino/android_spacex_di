@@ -17,7 +17,7 @@ class RocketsSourceModule {
 }
 
 @Module(includes = [RocketsSourceModule::class])
-class RocketsPresenterModule() {
+class RocketsPresenterModule {
 
     @Provides
     @PerScreenSccope
