@@ -1,27 +1,23 @@
 package tasaquino.com.spacexdi.di.modules
 
-import dagger.Module
-import dagger.Provides
-import tasaquino.com.spacexdi.di.PerScreenSccope
-import tasaquino.com.spacexdi.networking.SpacexAPI
+import org.kodein.di.Kodein
+import org.kodein.di.generic.bind
+import org.kodein.di.generic.instance
+import org.kodein.di.generic.singleton
 import tasaquino.com.spacexdi.rockets.Rockets
 import tasaquino.com.spacexdi.rockets.infrastructure.RocketsInfrastructure
 import tasaquino.com.spacexdi.rockets.presenter.RocketsPresenter
 
-@Module(includes = [NetworkingModule::class])
-class RocketsSourceModule {
+val rocketsSourceModule = Kodein.Module("rocketsSourceModule") {
 
-    @Provides
-    @PerScreenSccope
-    fun provideSource(api: SpacexAPI): Rockets.Source = RocketsInfrastructure(api)
+    bind<Rockets.Source>() with singleton{
+        RocketsInfrastructure(api = instance())
+    }
 }
 
-@Module(includes = [RocketsSourceModule::class])
-class RocketsPresenterModule() {
+val rocketsPresenterModule = Kodein.Module("rocketsPresenterModule") {
 
-    @Provides
-    @PerScreenSccope
-    fun providePresenter(source: Rockets.Source): Rockets.Presenter {
-        return RocketsPresenter(source)
+    bind<Rockets.Presenter>() with singleton {
+        RocketsPresenter(source = instance())
     }
 }
