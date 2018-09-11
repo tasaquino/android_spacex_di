@@ -13,17 +13,13 @@ import tasaquino.com.spacexdi.rockets.Rockets
 import tasaquino.com.spacexdi.rockets.presenter.model.RocketViewModel
 
 class RocketsActivity : AppCompatActivity(), KodeinAware, Rockets.View {
-    private val _parentKodein by closestKodein()
-    override val kodein: Kodein by retainedKodein {
-        extend(_parentKodein, copy = Copy.All)
-        import(appDiModule)
-    }
+    override val kodein by closestKodein()
+    private val presenter by instance<Rockets.Presenter>()
 
     override fun showRockets(rockets: List<RocketViewModel>) {
         Log.d("Rockets", "Awsome rockets: $rockets")
     }
 
-    private val presenter by instance<Rockets.Presenter>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_rockets)

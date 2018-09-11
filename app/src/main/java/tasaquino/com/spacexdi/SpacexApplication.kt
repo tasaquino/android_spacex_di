@@ -9,11 +9,10 @@ import tasaquino.com.spacexdi.di.modules.rocketsSourceModule
 import tasaquino.com.spacexdi.rockets.presenter.RocketsPresenter
 
 class SpacexApplication : Application(), KodeinAware {
-    override val kodein: Kodein = Kodein {
+    override val kodein: Kodein = Kodein.lazy {
         import(appDiModule)
     }
 }
-
 
 val appDiModule = Kodein.Module("appDiModule") {
     import(networkingModule)
