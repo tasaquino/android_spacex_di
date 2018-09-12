@@ -1,8 +1,17 @@
 package tasaquino.com.spacexdi
 
 import android.app.Application
-import tasaquino.com.spacexdi.di.components.DaggerAppComponent
+import org.koin.android.ext.android.startKoin
+import tasaquino.com.spacexdi.di.modules.*
 
 class SpacexApplication : Application() {
-    val appComponent by lazy { DaggerAppComponent.create() }
+
+    override fun onCreate() {
+        super.onCreate()
+        startKoin(this, listOf(
+                networkingModule,
+                rocketSourceModule,
+                rocketPresenterModule
+        ))
+    }
 }

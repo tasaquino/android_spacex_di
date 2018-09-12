@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:name=".SpacexApplication">
-        <activity android:name=".RocketsActivity">
+        <activity android:name=".rockets.ui.RocketsActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
