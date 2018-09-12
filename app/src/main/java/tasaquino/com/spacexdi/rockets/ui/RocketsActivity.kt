@@ -3,18 +3,15 @@ package tasaquino.com.spacexdi
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import org.kodein.di.Copy
-import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.closestKodein
-import org.kodein.di.android.retainedKodein
 import org.kodein.di.generic.instance
 import tasaquino.com.spacexdi.rockets.Rockets
 import tasaquino.com.spacexdi.rockets.presenter.model.RocketViewModel
 
 class RocketsActivity : AppCompatActivity(), KodeinAware, Rockets.View {
     override val kodein by closestKodein()
-    private val presenter by instance<Rockets.Presenter>()
+    private val presenter: Rockets.Presenter by instance()
 
     override fun showRockets(rockets: List<RocketViewModel>) {
         Log.d("Rockets", "Awsome rockets: $rockets")
