@@ -13,7 +13,7 @@ import tasaquino.com.spacexdi.rockets.presenter.RocketsPresenter
 val rocketsSourceModule = Kodein.Module("rocketsSourceModule") {
 
     bind<Rockets.Source>() with scoped(AndroidComponentsWeakScope).singleton {
-        RocketsInfrastructure(api = instance())
+        RocketsInfrastructure(kodein = kodein)
     }
 }
 
